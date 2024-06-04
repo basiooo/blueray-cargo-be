@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.urls import include, path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from authentication.views import ApiRegistration
+from master.urls import api_url_pattern as master_api_url
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -26,4 +27,4 @@ urlpatterns = [
     path("api/token/", TokenObtainPairView.as_view(), name="api_token_obtain_pair"),
     path("api/register/", ApiRegistration.as_view(), name="api_register"),
     path("api/token/refresh", TokenRefreshView.as_view(), name="api_token_refresh"),
-]
+]+ master_api_url
