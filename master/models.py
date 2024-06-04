@@ -10,7 +10,7 @@ class Country(models.Model):
         unique=True,
         help_text="static url for this flag",
     )
-    currency = models.CharField(max_length=255, null=False, blank=False, unique=True)
+    currency = models.CharField(max_length=255, null=False, blank=False)
 
     def __str__(self):
         return self.name
