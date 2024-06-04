@@ -1,0 +1,5 @@
+djangorestframework
+django==4.2
+black
+djangorestframework
+djangorestframework-simplejwt
