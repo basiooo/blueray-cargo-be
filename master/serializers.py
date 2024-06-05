@@ -14,3 +14,10 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = "__all__"
+
+
+class CalculationSerializer(serializers.Serializer):
+    weight = serializers.IntegerField()
+    category_id = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
+    country_id = serializers.PrimaryKeyRelatedField(queryset=Country.objects.all())
+    destination_id = serializers.IntegerField()
