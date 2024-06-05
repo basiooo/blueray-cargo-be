@@ -39,6 +39,36 @@ class Migration(migrations.Migration):
                 "title": "Spare parts",
                 "price_per_kilo": 210000,
             },
+            {
+                "country": "singapore",
+                "title": "Electronic",
+                "price_per_kilo": 200000,
+            },
+            {
+                "country": "thailand",
+                "title": "Electronic",
+                "price_per_kilo": 250000,
+            },
+            {
+                "country": "thailand",
+                "title": "Chip",
+                "price_per_kilo": 300000,
+            },
+            {
+                "country": "thailand",
+                "title": "Laptop and Computer",
+                "price_per_kilo": 220000,
+            },
+            {
+                "country": "thailand",
+                "title": "Garments",
+                "price_per_kilo": 200000,
+            },
+            {
+                "country": "singapore",
+                "title": "Spare parts",
+                "price_per_kilo": 210000,
+            },
         ]
         for c in categories:
             country = country_model.objects.filter(
