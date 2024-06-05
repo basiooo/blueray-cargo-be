@@ -1,5 +1,6 @@
 djangorestframework
 django==4.2
+requests
 black
 djangorestframework
 djangorestframework-simplejwt
