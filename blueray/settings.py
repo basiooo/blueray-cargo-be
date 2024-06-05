@@ -138,5 +138,14 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/var/tmp/django_cache',
+    }
+}
+
+
 RAJA_ONGKIR_API_KEY = os.environ.get("RAJA_ONGKIR_API_KEY","")
 RAJA_ONGKIR_API_URL = os.environ.get("RAJA_ONGKIR_API_URL","")

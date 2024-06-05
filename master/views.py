@@ -10,6 +10,7 @@ from rest_framework.decorators import (
 )
 from master.external_call import get_cities
 from master.utils import search_city_by_name
+from django.core.cache import cache
 
 
 @permission_classes([IsAuthenticated])
@@ -29,7 +30,11 @@ class CountryListAV(generics.ListAPIView):
 @permission_classes([IsAuthenticated])
 @authentication_classes([JWTAuthentication])
 def destination(request):
-    cities = get_cities()
+    cities = cache.get("rajaongkir_cities")
+    if not cities:
+        cities = get_cities()
+        if len(cities) > 0:
+            cache.set("rajaongkir_cities",cities)
     search = request.query_params.get("search")
     if search:
         cities = search_city_by_name(search, cities)
