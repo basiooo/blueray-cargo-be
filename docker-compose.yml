@@ -1,0 +1,61 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres:14.2-alpine
+    expose:
+     - 5432
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    networks:
+      blueray_network:
+    profiles: ["","test"]
+
+  app:
+    build: .
+    container_name: blueray_app
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_HOST=${DB_HOST}
+      - POSTGRES_PORT=${DB_PORT}
+    volumes:
+      - .:/blueray
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    profiles: [""]
+    networks:
+      - blueray_network
+
+  test:
+    build: .
+    container_name: blueray_app_test
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_HOST=${DB_HOST}
+      - POSTGRES_PORT=${DB_PORT}
+    volumes:
+      - .:/blueray
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    command: sh -c "python manage.py test"
+    profiles: ["test"]
+    networks:
+      - blueray_network
+
+networks:
+  blueray_network:
