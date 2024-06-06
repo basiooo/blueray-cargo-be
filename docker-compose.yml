@@ -24,13 +24,14 @@ services:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_HOST=${DB_HOST}
       - POSTGRES_PORT=${DB_PORT}
+      - POSTGRES_NAME=${DB_NAME}
     volumes:
       - .:/blueray
     ports:
       - 8000:8000
     depends_on:
       - db
-    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: sh -c "./wait-for-postgres.sh && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     profiles: [""]
     networks:
       - blueray_network
@@ -52,7 +53,7 @@ services:
       - 8000:8000
     depends_on:
       - db
-    command: sh -c "python manage.py test"
+    command: sh -c "./wait-for-postgres.sh && python manage.py test"
     profiles: ["test"]
     networks:
       - blueray_network

@@ -3,7 +3,7 @@
 status=1
 while [ $status -gt 0 ]
 do
-  PG_URL="postgresql://$DB_USER:$DB_PASSWORD@$DB_HOST:$DB_PORT/$DB_NAME"
+  PG_URL="postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POSTGRES_PORT/$POSTGRES_NAME"
   # echo $PG_URL
 
   psql $PG_URL -c "\q" > /dev/null 2>&1
