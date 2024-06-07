@@ -16,3 +16,5 @@
   - Dengan docker 
     - jalankan perintah ```docker-compose --profile test up```
 
+  - Tanpa docker
+    - jalankan perintah ```python manage.py test```
